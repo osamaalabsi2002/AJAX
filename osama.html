@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AJAX Chat Example</title>
+</head>
+
+<body>
+<label for="input">write text:</label>
+ <input type="text" id="input" onkeyup="save()">
+ <h1>get commenit: <span id="textt"></span></h1>
+ <button id="button">send</button>
+<p id="respon"></p>
+
+ 
+  <script>
+    var responseElem = document.getElementById("respon");
+    var elemnt = document.getElementById("textt");
+    var input;
+    var comment;
+
+    function save() {
+      input = document.getElementById("input").value;
+      comment = input;
+      elemnt.innerText = comment;
+
+    }
+
+    function get() {
+      var requset = new XMLHttpRequest();
+      requset.open("GET", comment, true);
+      requset.onreadystatechange = function () {
+        if (requset.readyState == 4 && requset.status == 200) {
+
+          var response = JSON.parse(requset.responseText);
+          responseElem.innerHTML = JSON.stringify(response, null, 2);
+        }
+      }
+    };
+    requset.send();
+
+  </script>
+</body>
+
+</html>
